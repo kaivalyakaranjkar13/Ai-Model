@@ -171,27 +171,29 @@ if predict:
         """, unsafe_allow_html=True)
 
         # -------------------------------
-        # SEVERITY CARD
+        # SEVERITY
         # -------------------------------
         score, details = get_severity(selected_symptoms)
 
-        severity_html = ""
+        st.subheader("📊 Symptom Severity")
+
         for s, w in details:
             if w >= 5:
-                severity_html += f"🔴 <b>{s}</b> (High)<br>"
+                st.markdown(f"🔴 **{s}** (High)")
             elif w >= 3:
-                severity_html += f"🟡 <b>{s}</b> (Medium)<br>"
+                st.markdown(f"🟡 **{s}** (Medium)")
             else:
-                severity_html += f"🟢 <b>{s}</b> (Low)<br>"
+                st.markdown(f"🟢 **{s}** (Low)")
 
-        st.markdown(f"""
-        <div class="card">
-            <h3>📊 Symptom Severity</h3>
-            {severity_html}
-            <br><b>Total Score:</b> {score}
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"### Total Severity Score: {score}")
 
+        if score > 15:
+            st.error("🚨 High severity! Consult doctor immediately.")
+        elif score > 8:
+            st.warning("⚠️ Moderate condition. Take precautions.")
+        else:
+            st.success("✅ Mild condition.")
+            
         # -------------------------------
         # DESCRIPTION CARD
         # -------------------------------
@@ -254,5 +256,4 @@ if predict:
 # FOOTER
 # -------------------------------
 st.markdown("---")
-
 st.markdown("<center>⚡ AI Final Year Project | Built with Streamlit</center>", unsafe_allow_html=True)
