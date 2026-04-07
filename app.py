@@ -212,7 +212,7 @@ if predict:
         # -------------------------------
         try:
             p = prec[prec['Disease'] == disease].values[0][1:]
-            precaution_html = "<br>".join([f"-> {i}" for i in p])
+            precaution_html = "<br>".join([f"👉 {i}" for i in p])
         except:
             precaution_html = "Not available"
 
@@ -254,4 +254,5 @@ if predict:
 # FOOTER
 # -------------------------------
 st.markdown("---")
+
 st.markdown("<center>⚡ AI Final Year Project | Built with Streamlit</center>", unsafe_allow_html=True)
